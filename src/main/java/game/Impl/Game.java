@@ -1,7 +1,8 @@
 package game.Impl;
 
 import game.IGame;
-import game.WinPlayer;
+import game.utilEnum.ResultType;
+import game.utilEnum.WinPlayer;
 
 import java.util.Objects;
 
@@ -77,23 +78,36 @@ public class Game implements IGame<Player> {
      * @param initialScore the initial score
      * @return the game
      */
-    public Game gameScore(String initialScore) {
-        String[] scores = initialScore.split(" ");
-        firstPlayer.setScore(Integer.parseInt(scores[0]));
-        secondPlayer.setScore(Integer.parseInt(scores[1]));
 
+    public Game gameScore(String initialScore) {
+        int scoreFirst=firstPlayerScore();
+        int secondScore=secondPlayerScore();
+        if (initialScore.equals("Deuce")) {
+            scoreFirst = 40;
+            scoreFirst= 40;
+        }else {
+            String[] scores = initialScore.split(" ");
+            firstPlayer.setScore(Integer.parseInt(scores[0]));
+            secondPlayer.setScore(Integer.parseInt(scores[1]));
+        }
         return new Game(firstPlayer, secondPlayer);
     }
-
     /**
      * Score string.
      *
      * @return the string
      */
     public String score() {
+        if (aPlayAfterPoint()) {
+            ResultType resultType = ResultType.of(this.firstPlayerScore(), this.secondPlayerScore());
+            return String.valueOf(resultType.label);
+        }
         return firstPlayerScore() + " " + secondPlayerScore();
     }
 
+    private boolean aPlayAfterPoint() {
+        return (this.firstPlayerScore() >= 40 && this.secondPlayerScore() >= 40) || this.firstPlayerScore() > 40 || this.secondPlayerScore() > 40 ||(this.firstPlayerScore() < 40 && this.secondPlayerScore() >= 40)||(this.firstPlayerScore() >= 40 && this.secondPlayerScore() < 40);
+    }
     @Override
     public boolean incrementSecondPlayer() {
         if (isFinished()) {
@@ -121,7 +135,7 @@ public class Game implements IGame<Player> {
      *
      * @return the boolean
      */
-    boolean isDeuce() {
+   public boolean isDeuce() {
         if (firstPlayer.isHasAdvantage() || secondPlayer.isHasAdvantage()) {
             return false;
         }

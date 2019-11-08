@@ -29,7 +29,7 @@ public class Player implements IPlayer {
         this.hasAdvantage = hasAdvantage;
     }
 
-    private boolean hasAdvantage;
+    public boolean hasAdvantage;
 
     /**
      * Instantiates a new Player.

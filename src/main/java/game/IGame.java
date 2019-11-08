@@ -1,10 +1,15 @@
 package game;
 
+import game.Impl.Player;
+import game.utilEnum.WinPlayer;
+
+import java.util.Optional;
+
 /**
  * Created by houssem89 on 07/11/2019.
  * @param <E>  the type parameter
  */
-public interface IGame<E extends IPlayer> {
+public interface IGame<E extends Player> {
     /**
      * Increment first player.
      *
@@ -61,5 +66,12 @@ public interface IGame<E extends IPlayer> {
      */
     public WinPlayer getWinnerPlayer();
 
-
+    default Optional<IPlayer> getWinner(){
+        if (getWinnerPlayer().equals(WinPlayer.NONE)) {
+            return Optional.empty();
+        }
+        return getWinnerPlayer().equals(WinPlayer.First_Player) ?
+                Optional.of(getFirstPlayer()) :
+                Optional.of(getSecondPlayer());
+    }
 }
