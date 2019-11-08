@@ -48,7 +48,7 @@ public class ScoreTest {
     }
 
     @Test
-    public void reset() {
+    public void reset() throws EnterScoreException {
         IScore s = new Score();
 
         boolean state = s.incrementScore();

@@ -1,24 +1,34 @@
 package game.Impl;
 
 import game.IGame;
+import game.IRule;
+import game.Impl.state.Advantage;
+import game.Impl.state.Deuce;
+import game.Impl.state.GameFinished;
 import game.utilEnum.ResultType;
 import game.utilEnum.WinPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by houssem89 on 07/11/2019.
  */
 public class Game implements IGame<Player> {
+    private static final int MAX_SCORE = 40;
     private final Player firstPlayer;
     private final Player secondPlayer;
     private WinPlayer winPlayer;
-    private static final int MAX_SCORE = 40;
+    private List<IRule> rules = new ArrayList<>();
 
     private Game(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = Objects.requireNonNull(firstPlayer, "should be not null firstPlayer");
         this.secondPlayer = Objects.requireNonNull(secondPlayer, "should be not null secondPlayer");
         this.winPlayer = WinPlayer.NONE;
+        this.rules.add(new Advantage(firstPlayer, secondPlayer));
+        this.rules.add(new Deuce(firstPlayer, secondPlayer));
+        this.rules.add(new GameFinished(firstPlayer, secondPlayer));
     }
 
     /**
@@ -80,18 +90,19 @@ public class Game implements IGame<Player> {
      */
 
     public Game gameScore(String initialScore) {
-        int scoreFirst=firstPlayerScore();
-        int secondScore=secondPlayerScore();
+        int scoreFirst = firstPlayerScore();
+        int secondScore = secondPlayerScore();
         if (initialScore.equals("Deuce")) {
             scoreFirst = 40;
-            scoreFirst= 40;
-        }else {
+            scoreFirst = 40;
+        } else {
             String[] scores = initialScore.split(" ");
             firstPlayer.setScore(Integer.parseInt(scores[0]));
             secondPlayer.setScore(Integer.parseInt(scores[1]));
         }
         return new Game(firstPlayer, secondPlayer);
     }
+
     /**
      * Score string.
      *
@@ -106,8 +117,9 @@ public class Game implements IGame<Player> {
     }
 
     private boolean aPlayAfterPoint() {
-        return (this.firstPlayerScore() >= 40 && this.secondPlayerScore() >= 40) || this.firstPlayerScore() > 40 || this.secondPlayerScore() > 40 ||(this.firstPlayerScore() < 40 && this.secondPlayerScore() >= 40)||(this.firstPlayerScore() >= 40 && this.secondPlayerScore() < 40);
+        return (this.firstPlayerScore() >= 40 && this.secondPlayerScore() >= 40) || this.firstPlayerScore() > 40 || this.secondPlayerScore() > 40 || (this.firstPlayerScore() < 40 && this.secondPlayerScore() >= 40) || (this.firstPlayerScore() >= 40 && this.secondPlayerScore() < 40);
     }
+
     @Override
     public boolean incrementSecondPlayer() {
         if (isFinished()) {
@@ -135,7 +147,7 @@ public class Game implements IGame<Player> {
      *
      * @return the boolean
      */
-   public boolean isDeuce() {
+    public boolean isDeuce() {
         if (firstPlayer.isHasAdvantage() || secondPlayer.isHasAdvantage()) {
             return false;
         }

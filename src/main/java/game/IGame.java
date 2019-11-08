@@ -7,6 +7,7 @@ import java.util.Optional;
 
 /**
  * Created by houssem89 on 07/11/2019.
+ *
  * @param <E>  the type parameter
  */
 public interface IGame<E extends Player> {
@@ -66,7 +67,12 @@ public interface IGame<E extends Player> {
      */
     public WinPlayer getWinnerPlayer();
 
-    default Optional<IPlayer> getWinner(){
+    /**
+     * Gets winner.
+     *
+     * @return the winner
+     */
+    default Optional<IPlayer> getWinner() {
         if (getWinnerPlayer().equals(WinPlayer.NONE)) {
             return Optional.empty();
         }

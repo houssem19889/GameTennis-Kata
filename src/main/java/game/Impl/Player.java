@@ -9,7 +9,21 @@ import java.util.Objects;
  */
 public class Player implements IPlayer {
     private final String namePlayer;
+    /**
+     * The Has advantage.
+     */
+    public boolean hasAdvantage;
     private Score score;
+
+    /**
+     * Instantiates a new Player.
+     *
+     * @param namePlayer the name player
+     */
+    public Player(String namePlayer) {
+        this.namePlayer = Objects.requireNonNull(namePlayer, "should be not null");
+        this.score = new Score();
+    }
 
     /**
      * Is has advantage.
@@ -27,18 +41,6 @@ public class Player implements IPlayer {
      */
     public void setHasAdvantage(boolean hasAdvantage) {
         this.hasAdvantage = hasAdvantage;
-    }
-
-    public boolean hasAdvantage;
-
-    /**
-     * Instantiates a new Player.
-     *
-     * @param namePlayer the name player
-     */
-    public Player(String namePlayer) {
-        this.namePlayer = Objects.requireNonNull(namePlayer, "should be not null");
-        this.score = new Score();
     }
 
     @Override
