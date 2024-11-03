@@ -22,7 +22,7 @@ public abstract class GameRule implements IRule {
     /**
      * Instantiates a new Game rule.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      */
     public GameRule(Player firstPlayer, Player secondPlayer) {
@@ -48,12 +48,5 @@ public abstract class GameRule implements IRule {
         return secondPlayer;
     }
 
-    /**
-     * Gets rule result.
-     *
-     * @return the rule result
-     */
-    public IRuleResult getRuleResult() {
-        return ruleResult;
-    }
+
 }

@@ -4,15 +4,16 @@ import game.Impl.Player;
 import game.Impl.RuleResultImpl;
 import game.utilEnum.ResultType;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Game finished.
  */
 public class GameFinished extends GameRule {
 
     /**
      * Instantiates a new Game finished.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      */
     public GameFinished(Player firstPlayer, Player secondPlayer) {

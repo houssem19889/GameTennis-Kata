@@ -3,8 +3,9 @@ package game.Impl;
 import game.Exception.EnterScoreException;
 import game.IScore;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Set score.
  */
 public class SetScore implements IScore {
     private final static int MAX_SCORE = 7;

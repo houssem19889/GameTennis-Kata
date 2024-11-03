@@ -3,8 +3,9 @@ package game.Impl;
 import game.Exception.EnterScoreException;
 import game.IScore;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The type Score.
  */
 public class Score implements IScore {
     private int score;

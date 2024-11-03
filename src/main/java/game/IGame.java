@@ -5,10 +5,11 @@ import game.utilEnum.WinPlayer;
 
 import java.util.Optional;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The interface Game.
  *
- * @param <E>  the type parameter
+ * @param <E> the type parameter
  */
 public interface IGame<E extends Player> {
     /**
@@ -65,7 +66,7 @@ public interface IGame<E extends Player> {
      *
      * @return the winner player
      */
-    public WinPlayer getWinnerPlayer();
+    WinPlayer getWinnerPlayer();
 
     /**
      * Gets winner.

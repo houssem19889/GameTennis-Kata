@@ -4,8 +4,9 @@ import game.IPlayer;
 
 import java.util.Objects;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The type Player.
  */
 public class Player implements IPlayer {
     private final String namePlayer;

@@ -2,8 +2,9 @@ package game;
 
 import game.utilEnum.ResultType;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The interface Rule.
  */
 public interface IRule {
     /**

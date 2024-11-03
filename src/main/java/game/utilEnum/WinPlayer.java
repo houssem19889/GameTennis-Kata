@@ -7,10 +7,12 @@ public enum WinPlayer {
     /**
      * The First_Player.
      */
-    First_Player, /**
+    First_Player,
+    /**
      * The Second_Player.
      */
-    Second_Player, /**
+    Second_Player,
+    /**
      * The NONE.
      */
     NONE;

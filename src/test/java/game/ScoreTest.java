@@ -13,6 +13,11 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class ScoreTest {
 
+    /**
+     * Play with score.
+     *
+     * @throws EnterScoreException the enter score exception
+     */
     @Test
     public void playWithScore() throws EnterScoreException {
         IScore s = new Score();
@@ -23,6 +28,11 @@ public class ScoreTest {
         assertEquals(30, s.getCurrentScore());
     }
 
+    /**
+     * Increment.
+     *
+     * @throws EnterScoreException the enter score exception
+     */
     @Test
     public void increment() throws EnterScoreException {
         IScore s = new Score();
@@ -47,6 +57,11 @@ public class ScoreTest {
         assertEquals(40, s.getCurrentScore()); // 40 max score
     }
 
+    /**
+     * Reset.
+     *
+     * @throws EnterScoreException the enter score exception
+     */
     @Test
     public void reset() throws EnterScoreException {
         IScore s = new Score();

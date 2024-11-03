@@ -3,8 +3,9 @@ package game.Impl;
 import game.IRuleResult;
 import game.utilEnum.ResultType;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Rule result.
  */
 public class RuleResultImpl implements IRuleResult {
     private ResultType resultType;
@@ -14,7 +15,7 @@ public class RuleResultImpl implements IRuleResult {
      * Instantiates a new Rule result impl.
      *
      * @param resultType the result type
-     * @param player the player
+     * @param player     the player
      */
     public RuleResultImpl(ResultType resultType, Player player) {
         this.resultType = resultType;
@@ -26,8 +27,4 @@ public class RuleResultImpl implements IRuleResult {
         return this.player = player;
     }
 
-    @Override
-    public ResultType getType() {
-        return this.resultType = resultType;
-    }
 }

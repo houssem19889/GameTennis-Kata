@@ -4,14 +4,15 @@ import game.Impl.Player;
 import game.Impl.RuleResultImpl;
 import game.utilEnum.ResultType;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Deuce.
  */
 public class Deuce extends GameRule {
     /**
      * Instantiates a new Deuce.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      */
     public Deuce(Player firstPlayer, Player secondPlayer) {

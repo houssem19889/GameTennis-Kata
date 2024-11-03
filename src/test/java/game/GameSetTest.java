@@ -13,6 +13,9 @@ import static junit.framework.TestCase.assertTrue;
  * Created by houssem89 on 08/11/2019.
  */
 public class GameSetTest {
+    /**
+     * First player domination.
+     */
     @Test
     public void firstPlayerDomination(){
     GameSet set = GameSet.between("Nadal", "Federer");
@@ -43,7 +46,10 @@ public class GameSetTest {
     assertEquals("Nadal", winner.get().getNamePlayer());
 }
 
-        @Test
+    /**
+     * Second player domination.
+     */
+    @Test
         public void secondPlayerDomination(){
             GameSet set = GameSet.between("Nadal", "Federer");
             assertEquals(0, set.secondPlayerScore());
@@ -73,7 +79,10 @@ public class GameSetTest {
             assertEquals("Federer", winner.get().getNamePlayer());
         }
 
-        @Test
+    /**
+     * First player wins by tie break.
+     */
+    @Test
         public void firstPlayerWinsByTieBreak(){
             GameSet set = GameSet.between("Nadal", "Federer");
             set.incrementFirstPlayer();
@@ -104,7 +113,10 @@ public class GameSetTest {
             assertEquals("Nadal", winner.get().getNamePlayer());
         }
 
-        @Test
+    /**
+     * Second player wins by tie break.
+     */
+    @Test
         public void secondPlayerWinsByTieBreak(){
             GameSet set = GameSet.between("Nadal", "Federer");
             set.incrementFirstPlayer();
@@ -134,7 +146,11 @@ public class GameSetTest {
             Optional<IPlayer> winner = set.getWinner();
             assertEquals("Federer", winner.get().getNamePlayer());
         }
-        @Test
+
+    /**
+     * Get winner.
+     */
+    @Test
         public void getWinner(){
             GameSet set = GameSet.between("Nadal", "Federer");
 

@@ -1,7 +1,8 @@
 package game;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The interface Player.
  */
 public interface IPlayer {
     /**

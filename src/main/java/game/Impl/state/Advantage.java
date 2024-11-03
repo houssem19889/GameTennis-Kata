@@ -4,14 +4,15 @@ import game.Impl.Player;
 import game.Impl.RuleResultImpl;
 import game.utilEnum.ResultType;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Advantage.
  */
 public class Advantage extends GameRule {
     /**
      * Instantiates a new Advantage.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      */
     public Advantage(Player firstPlayer, Player secondPlayer) {
@@ -20,13 +21,19 @@ public class Advantage extends GameRule {
 
     @Override
     public boolean canBeApplied() {
-        boolean canBeApplied = getFirstPlayer().getScore() == GameRule.MAX_SCORE || getSecondPlayer().getScore() == GameRule.MAX_SCORE;
-        this.ruleResult = getFirstPlayer().getScore() == GameRule.MAX_SCORE
-                ? new RuleResultImpl(ResultType.ADVANTAGE, getFirstPlayer())
-                : new RuleResultImpl(ResultType.ADVANTAGE, getSecondPlayer());
-        return canBeApplied;
+        boolean hasAdvantage = playerHasAdvantage(getFirstPlayer()) || playerHasAdvantage(getSecondPlayer());
+
+        if (hasAdvantage) {
+            this.ruleResult = getFirstPlayer().getScore() == GameRule.MAX_SCORE
+                    ? new RuleResultImpl(ResultType.ADVANTAGE, getFirstPlayer())
+                    : new RuleResultImpl(ResultType.ADVANTAGE, getSecondPlayer());
+        }
+        return hasAdvantage;
     }
 
+    private boolean playerHasAdvantage(Player player) {
+        return player.getScore() == GameRule.MAX_SCORE;
+    }
     @Override
     public ResultType getResult() {
         return null;

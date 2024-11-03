@@ -18,6 +18,9 @@ import static junit.framework.TestCase.assertTrue;
 public class GameTest {
 
 
+    /**
+     * Should return 0 0 when no player scored.
+     */
     @Test
     public void should_return_0_0_when_no_player_scored() {
 
@@ -31,6 +34,10 @@ public class GameTest {
         // Then
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
+
+    /**
+     * Should return 15 0 when first player scored.
+     */
     @Test
     public void should_return_15_0_when_first_player_scored() {
         //Given
@@ -42,6 +49,10 @@ public class GameTest {
         //then
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
+
+    /**
+     * Should return 0 15 when second player scored.
+     */
     @Test
     public void should_return_0_15_when_second_player_scored() {
         //Given
@@ -55,6 +66,9 @@ public class GameTest {
         assertEquals(15, game.getSecondPlayer().getScore());
     }
 
+    /**
+     * Should return 15 15 when first player scores and the score was 0 15.
+     */
     @Test
     public void should_return_15_15_when_first_player_scores_and_the_score_was_0_15() {
 
@@ -71,6 +85,9 @@ public class GameTest {
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
 
+    /**
+     * Should return 15 15 when player 2 scores and the score was 15 0.
+     */
     @Test
     public void should_return_15_15_when_player2_scores_and_the_score_was_15_0() {
 
@@ -85,6 +102,9 @@ public class GameTest {
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
 
+    /**
+     * Should return 30 0 when first player scores and the score was 15 0.
+     */
     @Test
     public void should_return_30_0_when_first_player_scores_and_the_score_was_15_0() {
         // Given
@@ -97,6 +117,10 @@ public class GameTest {
         // Then
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
+
+    /**
+     * Should return 0 30 when second player scores and the score was 0 15.
+     */
     @Test
     public void should_return_0_30_when_second_player_scores_and_the_score_was_0_15() {
         // Given
@@ -109,6 +133,10 @@ public class GameTest {
         // Then
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
+
+    /**
+     * Should return 0 40 when second player scores and the score was 0 30.
+     */
     @Test
     public void should_return_0_40_when_second_player_scores_and_the_score_was_0_30() {
         // Given
@@ -125,6 +153,9 @@ public class GameTest {
     }
 
 
+    /**
+     * Should return win first player.
+     */
     @Test
     public void should_return_win_FirstPlayer() {
         Game game = Game.between("Rafael", "Federer");
@@ -141,6 +172,9 @@ public class GameTest {
         assertEquals("Rafael", winningPlayer.get().getNamePlayer());
     }
 
+    /**
+     * Should win second player.
+     */
     @Test
     public void should_win_SecondPlayer() {
         Game game = Game.between("Rafael", "Federer");
@@ -153,18 +187,28 @@ public class GameTest {
         assertTrue(winningPlayer.isPresent());
         assertEquals("Federer", winningPlayer.get().getNamePlayer());
     }
+
+    /**
+     * Should return first player score.
+     */
     @Test
     public void should_return_first_Player_Score(){
         Game game = Game.between("Rafael", "Federer");
         assertEquals(0, game.firstPlayerScore());
     }
 
+    /**
+     * Should return second player score.
+     */
     @Test
     public void should_return_second_Player_Score(){
         Game game = Game.between("Rafael", "Federer");
         assertEquals(0, game.secondPlayerScore());
     }
 
+    /**
+     * Should return deuce when first player scores and the score was 30 40.
+     */
     @Test
     public void should_return_Deuce_when_first_player_scores_and_the_score_was_30_40() {
         // Given
@@ -180,6 +224,9 @@ public class GameTest {
         Assertions.assertThat(score).isEqualTo(expectedScore);
     }
 
+    /**
+     * Deuce to win first player.
+     */
     @Test
     public void deuceToWinFirstPlayer() {
         //given
@@ -215,6 +262,9 @@ public class GameTest {
         assertTrue(game.isFinished());
     }
 
+    /**
+     * Should the game is deuce.
+     */
     @Test
     public void should_the_game_isDeuce() {
         //given
@@ -238,6 +288,9 @@ public class GameTest {
     }
 
 
+    /**
+     * Winning second player.
+     */
     @Test
     public void winningSecondPlayer() {
         Game game = Game.between("Rafael", "Federer");

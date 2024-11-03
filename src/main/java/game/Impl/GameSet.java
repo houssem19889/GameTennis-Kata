@@ -1,28 +1,30 @@
 package game.Impl;
 
 import game.IGame;
+import game.domain.PlayerScore;
 import game.utilEnum.WinPlayer;
 import javafx.util.Pair;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Game set.
  */
 public class GameSet implements IGame {
-    private final Pair<Player, SetScore> firstPlayer;
-    private final Pair<Player, SetScore> secondPlayer;
+    private final PlayerScore firstPlayer;
+    private final PlayerScore secondPlayer;
     private WinPlayer winPlayer;
     private boolean tieBreak;
 
     private GameSet(Player firstPlayer, Player secondPlayer) {
-        this.firstPlayer = new Pair<Player, SetScore>(firstPlayer, new SetScore());
-        this.secondPlayer = new Pair<Player, SetScore>(secondPlayer, new SetScore());
+        this.firstPlayer = new PlayerScore(firstPlayer);
+        this.secondPlayer = new PlayerScore(secondPlayer);
         this.winPlayer = WinPlayer.NONE;
     }
 
     /**
      * Between game set.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      * @return the game set
      */
@@ -34,7 +36,7 @@ public class GameSet implements IGame {
     /**
      * Between game set.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      * @return the game set
      */
@@ -44,18 +46,18 @@ public class GameSet implements IGame {
         return new GameSet(one, two);
     }
 
-    private static boolean tieBreakRule(Pair<Player, SetScore> scoringPlayer,
-                                        Pair<Player, SetScore> opponent,
+    private static boolean tieBreakRule(PlayerScore scoringPlayer,
+                                        PlayerScore opponent,
                                         Runnable winAction) {
-        if (scoringPlayer.getValue().getCurrentScore() == (opponent.getValue().getCurrentScore() + 1)) {
+        if (scoringPlayer.getScore().getCurrentScore() == (opponent.getScore().getCurrentScore() + 1)) {
             winAction.run();
             return false;
         }
-        return scoringPlayer.getValue().forceIncrement();
+        return scoringPlayer.getScore().forceIncrement();
     }
 
-    private static boolean isWinning(Pair<Player, SetScore> player, Pair<Player, SetScore> opponent) {
-        return opponent.getValue().getCurrentScore() <= 4 && player.getValue().getCurrentScore() == 5;
+    private static boolean isWinning(PlayerScore player, PlayerScore opponent) {
+        return opponent.getScore().getCurrentScore() <= 4 && player.getScore().getCurrentScore() == 5;
     }
 
     @Override
@@ -68,13 +70,13 @@ public class GameSet implements IGame {
         }
         if (firstPlayerScore() == 5 && secondPlayerScore() == 6) {
             tieBreak = true;
-            return firstPlayer.getValue().incrementScore();
+            return firstPlayer.getScore().incrementScore();
         }
         if (isWinning(firstPlayer, secondPlayer)) {
             firstPlayerWins();
             return false;
         }
-        return firstPlayer.getValue().incrementScore();
+        return firstPlayer.getScore().incrementScore();
     }
 
     @Override
@@ -87,22 +89,22 @@ public class GameSet implements IGame {
         }
         if (firstPlayerScore() == 6 && secondPlayerScore() == 5) {
             tieBreak = true;
-            return secondPlayer.getValue().incrementScore();
+            return secondPlayer.getScore().incrementScore();
         }
         if (isWinning(secondPlayer, firstPlayer)) {
             secondPlayerWins();
             return false;
         }
-        return secondPlayer.getValue().incrementScore();
+        return secondPlayer.getScore().incrementScore();
     }
 
     private void firstPlayerWins() {
-        firstPlayer.getValue().incrementScore();
+        firstPlayer.getScore().incrementScore();
         winPlayer = WinPlayer.First_Player;
     }
 
     private void secondPlayerWins() {
-        secondPlayer.getValue().incrementScore();
+        secondPlayer.getScore().incrementScore();
         winPlayer = WinPlayer.Second_Player;
     }
 
@@ -113,22 +115,22 @@ public class GameSet implements IGame {
 
     @Override
     public Player getFirstPlayer() {
-        return firstPlayer.getKey();
+        return firstPlayer.getPlayer();
     }
 
     @Override
     public Player getSecondPlayer() {
-        return secondPlayer.getKey();
+        return secondPlayer.getPlayer();
     }
 
     @Override
     public int firstPlayerScore() {
-        return firstPlayer.getValue().getCurrentScore();
+        return firstPlayer.getScore().getCurrentScore();
     }
 
     @Override
     public int secondPlayerScore() {
-        return secondPlayer.getValue().getCurrentScore();
+        return secondPlayer.getScore().getCurrentScore();
     }
 
     @Override

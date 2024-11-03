@@ -6,17 +6,24 @@ import  game.Impl.SetScore;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+
 /**
  * Created by houssem89 on 08/11/2019.
  */
 public class SetScoreTest {
 
 
+    /**
+     * Initialization.
+     */
     @Test
     public void initialization() {
         assertEquals(0, new SetScore() .getCurrentScore());
     }
 
+    /**
+     * Increment.
+     */
     @Test
     public void increment() {
         SetScore score = new SetScore();
@@ -24,6 +31,9 @@ public class SetScoreTest {
         assertEquals(1, score.getCurrentScore());
     }
 
+    /**
+     * Max score.
+     */
     @Test
     public void maxScore() {
         SetScore score = new SetScore();

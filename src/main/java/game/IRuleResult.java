@@ -4,7 +4,7 @@ import game.Impl.Player;
 import game.utilEnum.ResultType;
 
 /**
- * Created by houssem89 on 08/11/2019.
+ * The interface Rule result.
  */
 public interface IRuleResult {
     /**
@@ -14,12 +14,6 @@ public interface IRuleResult {
      */
     Player getScore();
 
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
-    ResultType getType();
 
 
 }

@@ -2,8 +2,9 @@ package game;
 
 import game.Exception.EnterScoreException;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The interface Score.
  */
 public interface IScore {
     /**
@@ -30,6 +31,7 @@ public interface IScore {
 
     /**
      * Reset score.
+     *
      * @throws EnterScoreException the enter score exception
      */
     public void resetScore() throws EnterScoreException;

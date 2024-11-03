@@ -11,6 +11,9 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class PlayerTest {
 
+    /**
+     * Increment score.
+     */
     @Test
     public void incrementScore() {
         IPlayer p = new Player("Tennis Match to Player");

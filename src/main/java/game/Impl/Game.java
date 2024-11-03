@@ -7,14 +7,19 @@ import game.Impl.state.Deuce;
 import game.Impl.state.GameFinished;
 import game.utilEnum.ResultType;
 import game.utilEnum.WinPlayer;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The type Game.
  */
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class Game implements IGame<Player> {
     private static final int MAX_SCORE = 40;
     private final Player firstPlayer;
@@ -22,7 +27,13 @@ public class Game implements IGame<Player> {
     private WinPlayer winPlayer;
     private List<IRule> rules = new ArrayList<>();
 
-    private Game(Player firstPlayer, Player secondPlayer) {
+    /**
+     * Instantiates a new Game.
+     *
+     * @param firstPlayer  the first player
+     * @param secondPlayer the second player
+     */
+    public Game(Player firstPlayer, Player secondPlayer ) {
         this.firstPlayer = Objects.requireNonNull(firstPlayer, "should be not null firstPlayer");
         this.secondPlayer = Objects.requireNonNull(secondPlayer, "should be not null secondPlayer");
         this.winPlayer = WinPlayer.NONE;
@@ -34,7 +45,7 @@ public class Game implements IGame<Player> {
     /**
      * Between game.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      * @return the game
      */
@@ -46,7 +57,7 @@ public class Game implements IGame<Player> {
     /**
      * Between game.
      *
-     * @param firstPlayer the first player
+     * @param firstPlayer  the first player
      * @param secondPlayer the second player
      * @return the game
      */
@@ -88,13 +99,10 @@ public class Game implements IGame<Player> {
      * @param initialScore the initial score
      * @return the game
      */
-
-    public Game gameScore(String initialScore) {
-        int scoreFirst = firstPlayerScore();
-        int secondScore = secondPlayerScore();
+  public Game gameScore(String initialScore) {
         if (initialScore.equals("Deuce")) {
-            scoreFirst = 40;
-            scoreFirst = 40;
+            firstPlayer.setScore(40);
+            secondPlayer.setScore(40);
         } else {
             String[] scores = initialScore.split(" ");
             firstPlayer.setScore(Integer.parseInt(scores[0]));
@@ -104,20 +112,27 @@ public class Game implements IGame<Player> {
     }
 
     /**
-     * Score string.
+     * Returns the current score as a string.
      *
-     * @return the string
+     * @return the formatted score string
      */
     public String score() {
-        if (aPlayAfterPoint()) {
-            ResultType resultType = ResultType.of(this.firstPlayerScore(), this.secondPlayerScore());
-            return String.valueOf(resultType.label);
+        if (isAdvantageOrWinPoint()) {
+            ResultType resultType = ResultType.of(firstPlayerScore(), secondPlayerScore());
+            return resultType.label;
         }
         return firstPlayerScore() + " " + secondPlayerScore();
     }
 
-    private boolean aPlayAfterPoint() {
-        return (this.firstPlayerScore() >= 40 && this.secondPlayerScore() >= 40) || this.firstPlayerScore() > 40 || this.secondPlayerScore() > 40 || (this.firstPlayerScore() < 40 && this.secondPlayerScore() >= 40) || (this.firstPlayerScore() >= 40 && this.secondPlayerScore() < 40);
+    /**
+     * Checks if the score is at a point where players are beyond 40 or both are at deuce.
+     *
+     * @return true if the game is in a play-after point state
+     */
+    private boolean isAdvantageOrWinPoint() {
+        return (firstPlayerScore() >= 40 && secondPlayerScore() >= 40) ||
+                firstPlayerScore() > 40 ||
+                secondPlayerScore() > 40;
     }
 
     @Override
@@ -127,31 +142,26 @@ public class Game implements IGame<Player> {
         }
         if (firstPlayer.isHasAdvantage()) {
             firstPlayer.setHasAdvantage(false);
-            return true;
-        }
-        if (isDeuce()) {
+        } else if (isDeuce()) {
             secondPlayer.setHasAdvantage(true);
             firstPlayer.setHasAdvantage(false);
-            return true;
-        }
-        if (secondPlayer.getScore() == MAX_SCORE || secondPlayer.isHasAdvantage()) {
+        } else if (secondPlayer.getScore() == MAX_SCORE || secondPlayer.isHasAdvantage()) {
             winPlayer = WinPlayer.Second_Player;
             return false;
+        } else {
+            return secondPlayer.incrementScore();
         }
-
-        return secondPlayer.incrementScore();
+        return true;
     }
 
     /**
-     * Is deuce.
+     * Checks if the game is in a deuce state.
      *
-     * @return the boolean
+     * @return true if both players are at deuce and neither has advantage
      */
     public boolean isDeuce() {
-        if (firstPlayer.isHasAdvantage() || secondPlayer.isHasAdvantage()) {
-            return false;
-        }
-        return (firstPlayer.getScore() == MAX_SCORE && secondPlayer.getScore() == MAX_SCORE);
+        return !firstPlayer.isHasAdvantage() && !secondPlayer.isHasAdvantage() &&
+                firstPlayer.getScore() == MAX_SCORE && secondPlayer.getScore() == MAX_SCORE;
     }
 
     @Override
@@ -185,11 +195,12 @@ public class Game implements IGame<Player> {
     }
 
     /**
-     * Reset void.
+     * Resets the game state.
      */
     void reset() {
         firstPlayer.resetScore();
         secondPlayer.resetScore();
         winPlayer = WinPlayer.NONE;
     }
+
 }
