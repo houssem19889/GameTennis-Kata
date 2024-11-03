@@ -12,8 +12,9 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
+
 /**
- * Created by houssem89 on 07/11/2019.
+ * The type Game test.
  */
 public class GameTest {
 

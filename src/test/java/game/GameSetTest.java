@@ -9,8 +9,9 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
+
 /**
- * Created by houssem89 on 08/11/2019.
+ * The type Game set test.
  */
 public class GameSetTest {
     /**
